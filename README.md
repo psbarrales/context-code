@@ -133,8 +133,8 @@ python repo.py --pr usuario/repositorio 1
 # Generar Markdown a partir de archivos
 python repo.py --path /ruta/al/proyecto
 
-# Generar un árbol de directorios
-python repo.py --tree /ruta/al/proyecto
+# Activar el modo dev
+python repo.py --dev /ruta/al/proyecto
 ```
 
 
