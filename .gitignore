@@ -1,0 +1,75 @@
+# Entornos virtuales
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# Archivos de caché de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Archivos generados por herramientas de empaquetado/distribución
+*.manifest
+*.spec
+
+# Configuración de IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de configuración y entornos locales
+*.env
+*.env.*
+!*.env.template
+*.ini
+*.local
+*.log
+*.sqlite3
+
+# Archivos de prueba
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache/
+pytest_cache/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Archivos generados por Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Archivos de sistemas operativos
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.bak
+*.swp
+*.tmp
+*.temp
+~$*
+
+# Archivos de despliegue y CI/CD
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos creados por Python tools
+*.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+
+data
