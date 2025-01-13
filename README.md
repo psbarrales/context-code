@@ -69,86 +69,112 @@ To ensure the project works correctly, you need to define some environment varia
 GPT_MODEL=gpt-4o-mini
 OPENAI_API_KEY=your_openai_token
 LLM_MONITOR_KEY=your_llm_monitor_key
+GITHUB_TOKEN=your_github_token
 ```
+
+---
 
 ## Usage
 
-To use the functionalities of repo.py, follow these steps:
-	1.	Clone the Repository
-Clone this repository or download the files.
-	2.	Install Dependencies
-Ensure Python 3.7 or higher is installed along with the required libraries. Install the dependencies using pip:
+To use the functionalities of `repo.py`, follow these steps:
 
+1. **Clone the Repository**  
+   Clone this repository or download the files.
+
+2. **Install Dependencies**  
+   Ensure Python 3.7 or higher is installed along with the required libraries. Install the dependencies using pip:
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
 
+3. **Run the Script**  
+   Execute the main script and pass the required arguments.
 
-	3.	Run the Script
-Execute the main script and pass the required arguments.
+---
 
-Usage Modes
+### Usage Modes
 
-1. Generate Git Diffs
+#### 1. Generate Git Diffs
 
+```bash
 python repo.py --git <repo_path> [range|branch|commit]
+```
 
-	•	Example: To generate a summary of differences between the current branch and main:
+- **Example**: To generate a summary of differences between the current branch and `main`:
 
+```bash
 python repo.py --git /path/to/repo main
+```
 
+#### 2. Retrieve Pull Request Information
 
-
-2. Retrieve Pull Request Information
-
+```bash
 python repo.py --pr <repository> <pr_number>
+```
 
-	•	Example: To retrieve information about a specific Pull Request:
+- **Example**: To retrieve information about a specific Pull Request:
 
+```bash
 python repo.py --pr user/repo 1
+```
 
+#### 3. Generate Markdown from Files in Directories
 
-
-3. Generate Markdown from Files in Directories
-
+```bash
 python repo.py --path <path1> <path2> ...
+```
 
-	•	Example: To generate a Markdown document from files in multiple paths:
+- **Example**: To generate a Markdown document from files in multiple paths:
 
+```bash
 python repo.py --path /path/to/project /another/path
+```
 
+#### 4. Activate Dev Mode (WIP)
 
+```bash
+python repo.py --dev <ruta>
+```
 
-4. Activate Dev Mode
+- **Example**: To index a path and ask more specific context-related questions:
+  ```bash
+  python repo.py --dev /ruta/al/proyecto
+  ```
 
-python repo.py --dev <path>
+---
 
-	•	Example: To index a path and ask more specific context-related questions:
+### Full Usage Example
 
-python repo.py --dev /path/to/project
-
-## Full Usage Example
-
-### Generate Git Diffs
+```bash
+# Generate Git Diffs
 python repo.py --git /path/to/repo
 
-### Retrieve Pull Request Information
+# Retrieve Pull Request Information
 python repo.py --pr user/repo 1
 
-### Generate Markdown from Files
+# Generate Markdown from Files
 python repo.py --path /path/to/project
 
-### Activate Dev Mode
+# Activate Dev Mode
 python repo.py --dev /path/to/project
+```
 
 ## TODO
-	•	Add reasoning over files.
-	•	Enable ReAct technique alongside RAG for enhanced context.
+
+- Add reasoning over files.
+- Enable ReAct technique alongside RAG for enhanced context.
+
+---
 
 ## Contributions
 
-Contributions are welcome. If you want to contribute, please open an “issue” or a “pull request.”
+Contributions are welcome. If you want to contribute, please open an "issue" or a "pull request."
+
+---
 
 ## License
 
-This project is under the MIT License. See the LICENSE file for more details.
+This project is under the MIT License. See the `LICENSE` file for more details.
