@@ -1,175 +1,154 @@
-# Proyecto Context Code
+# Context Code Project
 
-## Descripción
+## Description
 
-**Context Code** es una herramienta que permite generar documentación en formato Markdown a partir de archivos en rutas específicas. Este proyecto utiliza un modelo de inteligencia artificial para interactuar con los usuarios y proporcionar información contextual sobre los archivos analizados.
+**Context Code** is a tool designed to generate documentation in Markdown format from files in specific paths. This project uses an artificial intelligence model to interact with users and provide contextual information about the analyzed files.
 
 ---
 
-## Funcionalidades de `repo.py`
+## `repo.py` Functionalities
 
-El archivo `repo.py` ofrece funcionalidades clave para la generación de documentación y el manejo de repositorios de Git. A continuación, se describen sus principales funciones:
+The `repo.py` file offers key features for generating documentation and managing Git repositories. Below are its main functions:
 
-### 1. Generación de Markdown a partir de diferencias en Git
+### 1. Markdown Generation from Git Diffs
 
 - `generate_git_diff_markdown(repo_path: str, ref: str = None) -> str`  
-  Genera un resumen en Markdown de las diferencias entre commits, ramas o el último commit de la rama actual.
+  Generates a Markdown summary of the differences between commits, branches, or the latest commit in the current branch.
 
-### 2. Obtención de información de Pull Requests
+### 2. Pull Request Information Retrieval
 
 - `fetch_pull_request(repo: str, pr_number: int) -> dict`  
-  Obtiene datos de un Pull Request específico desde la API de GitHub.
+  Retrieves data of a specific Pull Request from the GitHub API.
 - `fetch_pull_request_files(repo: str, pr_number: int) -> list`  
-  Obtiene la lista de archivos modificados en un Pull Request.
+  Gets the list of files modified in a Pull Request.
 
-### 3. Generación de Markdown de Pull Requests
+### 3. Markdown Generation from Pull Requests
 
 - `generate_markdown_from_pr(repo: str, pr_number: int) -> str`  
-  Crea un resumen en formato Markdown que incluye los diffs de los archivos modificados en un Pull Request.
+  Creates a Markdown summary that includes the diffs of the files modified in a Pull Request.
 
-### 4. Generación de Markdown a partir de archivos
+### 4. Markdown Generation from Files
 
 - `generate_markdown(paths, ignored_paths=[])`  
-  Escanea directorios y archivos para crear un documento Markdown que incluye el contenido de archivos con extensiones específicas.
+  Scans directories and files to create a Markdown document that includes the content of files with specific extensions.
 
-### 5. Generación de árbol de directorios
+### 5. Directory Tree Generation
 
 - `generate_directory_tree(paths, ignore_dirs=None, max_depth=4)`  
-  Genera un árbol de directorios en formato de texto para las rutas especificadas.
+  Generates a directory tree in text format for the specified paths.
 
 ---
 
-## Variables de Entorno
+## Environment Variables
 
-Para que el proyecto funcione correctamente, necesitas definir algunas variables de entorno en un archivo `.env` en la raíz del proyecto. A continuación, se detallan las variables necesarias:
+To ensure the project works correctly, you need to define some environment variables in a `.env` file at the root of the project. Below are the required variables:
 
 - **GPT_MODEL**
 
-  - **Descripción**: Especifica el modelo de IA que se utilizará para las interacciones.
-  - **Valor por defecto**: `gpt-4o-mini`.
+  - **Description**: Specifies the AI model to be used for interactions.
+  - **Default Value**: `gpt-4o-mini`.
 
 - **OPENAI_API_KEY**
 
-  - **Descripción**: Tu clave de API de OpenAI, necesaria para autenticarte y realizar llamadas a sus servicios.
-  - **Valor**: `<tu_token_openai>` (debes reemplazarlo con tu clave real).
+  - **Description**: Your OpenAI API key, required for authentication and service calls.
+  - **Value**: `<your_openai_token>` (replace with your actual key).
 
 - **GITHUB_TOKEN**
 
-  - **Descripción**: Util para revisar PR desde github.
-  - **Valor**: `<tu_token_github>`.
+  - **Description**: Useful for reviewing PRs from GitHub.
+  - **Value**: `<your_github_token>`.
 
 - **LLM_MONITOR_KEY**
-  - **Descripción**: Clave de monitoreo para el uso del modelo de lenguaje desde https://app.lunary.ai/
-  - **Valor**: `<tu_llm_monitor_key>` (opcional).
 
-### Ejemplo de archivo `.env`
+  - **Description**: Monitoring key for language model usage from https://app.lunary.ai/
+  - **Value**: `<your_llm_monitor_key>` (optional).
+
+### Sample `.env` File
 
 ```plaintext
 GPT_MODEL=gpt-4o-mini
-OPENAI_API_KEY=tu_token_openai
-LLM_MONITOR_KEY=tu_llm_monitor_key
+OPENAI_API_KEY=your_openai_token
+LLM_MONITOR_KEY=your_llm_monitor_key
 ```
 
----
+## Usage
 
-## Uso
+To use the functionalities of repo.py, follow these steps:
+	1.	Clone the Repository
+Clone this repository or download the files.
+	2.	Install Dependencies
+Ensure Python 3.7 or higher is installed along with the required libraries. Install the dependencies using pip:
 
-Para utilizar las funcionalidades de `repo.py`, sigue estos pasos:
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
-1. **Clonar el repositorio**  
-   Clona este repositorio o descarga los archivos.
 
-2. **Instalar dependencias**  
-   Asegúrate de tener instalado Python 3.7 o superior y las bibliotecas necesarias. Puedes instalar las dependencias usando `pip`:
+	3.	Run the Script
+Execute the main script and pass the required arguments.
 
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
+Usage Modes
 
-3. **Ejecutar el script**  
-   Puedes ejecutar el script principal y pasarle los argumentos necesarios.
+1. Generate Git Diffs
 
----
+python repo.py --git <repo_path> [range|branch|commit]
 
-### Modos de Uso
+	•	Example: To generate a summary of differences between the current branch and main:
 
-#### 1. Generar diferencias de Git
+python repo.py --git /path/to/repo main
 
-```bash
-python repo.py --git <ruta_repo> [rango|rama|commit]
-```
 
-- **Ejemplo**: Para generar un resumen de las diferencias entre la rama actual y `main`:
-  ```bash
-  python repo.py --git /ruta/al/repositorio main
-  ```
 
-#### 2. Obtener información de un Pull Request
+2. Retrieve Pull Request Information
 
-```bash
-python repo.py --pr <repositorio> <número_pr>
-```
+python repo.py --pr <repository> <pr_number>
 
-- **Ejemplo**: Para obtener información sobre un Pull Request específico:
-  ```bash
-  python repo.py --pr usuario/repositorio 1
-  ```
+	•	Example: To retrieve information about a specific Pull Request:
 
-#### 3. Generar Markdown a partir de archivos en directorios
+python repo.py --pr user/repo 1
 
-```bash
-python repo.py --path <ruta1> <ruta2> ...
-```
 
-- **Ejemplo**: Para generar un documento Markdown a partir de archivos en múltiples rutas:
-  ```bash
-  python repo.py --path /ruta/al/proyecto /otra/ruta
-  ```
 
-#### 4. Activar el modo Dev
+3. Generate Markdown from Files in Directories
 
-```bash
-python repo.py --dev <ruta>
-```
+python repo.py --path <path1> <path2> ...
 
-- **Ejemplo**: Para indexar una ruta y poder hacer preguntas con contexto más especificos:
-  ```bash
-  python repo.py --dev /ruta/al/proyecto
-  ```
+	•	Example: To generate a Markdown document from files in multiple paths:
 
----
+python repo.py --path /path/to/project /another/path
 
-### Ejemplo completo de uso
 
-```bash
-# Generar diferencias de Git
-python repo.py --git /ruta/al/repositorio
 
-# Obtener información de un Pull Request
-python repo.py --pr usuario/repositorio 1
+4. Activate Dev Mode
 
-# Generar Markdown a partir de archivos
-python repo.py --path /ruta/al/proyecto
+python repo.py --dev <path>
 
-# Activar el modo dev
-python repo.py --dev /ruta/al/proyecto
-```
+	•	Example: To index a path and ask more specific context-related questions:
+
+python repo.py --dev /path/to/project
+
+## Full Usage Example
+
+### Generate Git Diffs
+python repo.py --git /path/to/repo
+
+### Retrieve Pull Request Information
+python repo.py --pr user/repo 1
+
+### Generate Markdown from Files
+python repo.py --path /path/to/project
+
+### Activate Dev Mode
+python repo.py --dev /path/to/project
 
 ## TODO
+	•	Add reasoning over files.
+	•	Enable ReAct technique alongside RAG for enhanced context.
 
-- Agregar razonamiento sobre archivos
-- Permitir con técnica ReAct junto a RAG tener más contexto
+## Contributions
 
----
+Contributions are welcome. If you want to contribute, please open an “issue” or a “pull request.”
 
-## Contribuciones
+## License
 
-Las contribuciones son bienvenidas. Si deseas contribuir, por favor abre un "issue" o un "pull request".
-
----
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+This project is under the MIT License. See the LICENSE file for more details.

@@ -388,18 +388,29 @@ class AIBot:
                 console.print(md)
 
 
-def read_multiline_input(start_line: str = ""):
-    print(Fore.LIGHTCYAN_EX +
-          "Pegue su contenido y, cuando termine, escriba `\"\"\"` (en una línea) para cerrar:")
+def read_multiline_input(start_line: str = "") -> str:
     lines = []
-    if len(start_line) > 0 and start_line != "\"\"\"":
+
+    if start_line == '"""':
+        print(Fore.LIGHTCYAN_EX +
+              "Pegue su contenido y, cuando termine, escriba `\"\"\"` (en una línea) para cerrar:")
+
+    if start_line.startswith('"""'):
+        start_line = start_line[3:]
+
+    if len(start_line) > 0:
         lines.append(start_line)
+
     while True:
-        line = input()
+        line = input(Fore.LIGHTYELLOW_EX)
+
         if line.strip().endswith('"""'):
+            lines.append(line.rstrip('"""'))
             break
+
         lines.append(line)
-    return Fore.LIGHTYELLOW_EX + "\n".join(lines)
+
+    return "\n".join(lines)
 
 
 def num_tokens_from_string(string: str, encoding_name: str = "gpt-4o-mini") -> int:
