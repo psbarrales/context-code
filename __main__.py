@@ -1,4 +1,4 @@
-from .repo import main
+import repo
 
 if __name__ == "__main__":
-    main()
+    repo.main()
